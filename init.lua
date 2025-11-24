@@ -310,3 +310,34 @@ vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", { desc = "Previous hunk
 -- Center cursor after scrolling
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
+
+-- Center cursor after search navigation
+vim.keymap.set("n", "n", "nzz", { desc = "Next search result and center" })
+vim.keymap.set("n", "N", "Nzz", { desc = "Previous search result and center" })
+
+-- Smart file runner
+vim.keymap.set("n", "<leader>r", function()
+  local ft = vim.bo.filetype
+  local file = vim.fn.expand("%")
+
+  if ft == "python" then
+    vim.cmd("split | terminal python3 " .. file)
+  elseif ft == "javascript" then
+    vim.cmd("split | terminal node " .. file)
+  elseif ft == "typescript" then
+    vim.cmd("split | terminal ts-node " .. file)
+  elseif ft == "lua" then
+    vim.cmd("split | terminal lua " .. file)
+  elseif ft == "sh" or ft == "bash" then
+    vim.cmd("split | terminal bash " .. file)
+  elseif ft == "html" then
+    vim.cmd("!xdg-open " .. file)
+  else
+    vim.notify("No runner configured for filetype: " .. ft, vim.log.levels.WARN)
+  end
+
+  -- Enter insert mode in terminal automatically
+  if ft ~= "html" then
+    vim.cmd("startinsert")
+  end
+end, { desc = "Run current file" })

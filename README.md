@@ -45,6 +45,16 @@ Leader key: `<Space>`
 - `]h` - Next hunk
 - `[h` - Previous hunk
 
+### Code Execution
+- `<Space>r` - Run current file (smart runner for Python, JS, Lua, Bash, etc.)
+
+### Navigation & Editing
+- `Ctrl+d` - Scroll down half page and center cursor
+- `Ctrl+u` - Scroll up half page and center cursor
+- `n` - Next search result and center cursor
+- `N` - Previous search result and center cursor
+- `Ctrl+w w` - Switch between splits/windows
+
 ## Setup
 
 Run `:Lazy sync` to install/update plugins
