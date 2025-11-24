@@ -1,0 +1,13 @@
+# Vim swap/backup files
+*.swp
+*.swo
+*.swn
+*~
+.*.sw[a-z]
+
+# Neovim undo files
+*.un~
+
+# OS files
+.DS_Store
+Thumbs.db
