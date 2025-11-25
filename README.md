@@ -61,6 +61,15 @@ Leader key: `<Space>`
 - `N` - Previous search result and center cursor
 - `Ctrl+w w` - Switch between splits/windows
 
+### Folding (Treesitter)
+- `za` - Toggle fold under cursor
+- `zo` - Open fold
+- `zc` - Close fold
+- `zR` - Open all folds
+- `zM` - Close all folds
+- `zr` - Reduce fold level (open one level)
+- `zm` - Increase fold level (close one level)
+
 ## Setup
 
 Run `:Lazy sync` to install/update plugins
