@@ -148,17 +148,34 @@ require("lazy").setup({
     -- Lualine statusline
     {
       "nvim-lualine/lualine.nvim",
-      dependencies = { "nvim-tree/nvim-web-devicons" },
+      dependencies = { "nvim-tree/nvim-web-devicons", "lewis6991/gitsigns.nvim" },
       config = function()
         require("lualine").setup({
           options = {
             theme = "auto",
             component_separators = { left = "|", right = "|" },
             section_separators = { left = "", right = "" },
+            globalstatus = true,
           },
           sections = {
             lualine_a = { "mode" },
-            lualine_b = { "branch", "diff", "diagnostics" },
+            lualine_b = {
+              "branch",
+              {
+                "diff",
+                source = function()
+                  local gitsigns = vim.b.gitsigns_status_dict
+                  if gitsigns then
+                    return {
+                      added = gitsigns.added,
+                      modified = gitsigns.changed,
+                      removed = gitsigns.removed,
+                    }
+                  end
+                end,
+              },
+              "diagnostics",
+            },
             lualine_c = { "filename" },
             lualine_x = { "encoding", "fileformat", "filetype" },
             lualine_y = { "progress" },
