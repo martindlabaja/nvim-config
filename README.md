@@ -30,6 +30,12 @@ Leader key: `<Space>`
 - `<Space>fo` - Recent files
 - `<Space>fc` - Commands
 
+**Inside Telescope:**
+- `Ctrl+j` - Move to next result
+- `Ctrl+k` - Move to previous result
+- `Enter` - Open selected file
+- `Esc` - Close Telescope
+
 ### LSP (Language Server)
 - `gd` - Go to definition
 - `K` - Hover documentation
