@@ -74,10 +74,41 @@
 
 ## Visual Mode
 
-- `v` - Visual mode (character)
+### Entering Visual Mode
+- `v` - Visual mode (character-wise)
 - `V` - Visual line mode
 - `Ctrl+v` - Visual block mode
 - `gv` - Reselect last visual selection
+
+### Selecting Text Blocks
+- `viw` - Select inside word
+- `viW` - Select inside WORD (includes punctuation - great for URLs!)
+- `vaw` - Select around word (with space)
+- `vaW` - Select around WORD (with space)
+- `vip` - Select inside paragraph
+- `vi"` - Select inside quotes
+- `vi(` - Select inside parentheses
+
+### Visual Mode + Motions
+- `v + e` - Visual to end of word
+- `v + $` - Visual to end of line
+- `v + G` - Visual to end of file
+- `v + w` - Visual forward by word
+- `v + }` - Visual to next paragraph
+
+### Visual Mode + Find
+- `vf<char>` - Visual to character (inclusive)
+- `vt<char>` - Visual till character (exclusive)
+- `vF<char>` - Visual to character backward
+- `vT<char>` - Visual till character backward
+
+### Example: Selecting a URL
+```
+Text: Check out https://github.com/user/repo for info
+Method 1: viW  (cursor on URL - selects whole URL)
+Method 2: v + e + e + e  (extend by words)
+Method 3: vf<space>  (select until next space)
+```
 
 ### In Visual Mode
 - `y` - Yank selection
@@ -85,6 +116,7 @@
 - `c` - Change selection
 - `>` `<` - Indent/unindent
 - `u` `U` - Lowercase/uppercase
+- `o` - Toggle cursor to other end of selection
 
 ## Text Objects
 
