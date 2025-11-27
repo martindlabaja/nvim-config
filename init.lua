@@ -25,6 +25,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
+vim.opt.foldtext = ""
 
 -- Plugin Manager Lazy
 -- Bootstrap lazy.nvim
@@ -243,6 +244,46 @@ require("lazy").setup({
       },
     },
 
+    -- Claude Code integration
+    {
+      "greggh/claude-code.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("claude-code").setup({
+          command = "claude --resume",
+          -- window = {
+          --   position = "botright",
+          --   split_ratio = 0.3,
+          --   enter_insert = true,
+          --   float = {
+          --     width = "80%",
+          --     height = "80%",
+          --     border = "rounded",
+          --   },
+          -- },
+          -- refresh = {
+          --   enable = true,
+          --   updatetime = 100,
+          --   timer_interval = 1000,
+          --   show_notifications = true,
+          -- },
+          -- git = {
+          --   use_git_root = true,
+          -- },
+          keymaps = {
+            toggle = {
+              normal = "<leader>cc",
+              terminal = "<leader>cc",
+              -- variants = {
+              --   continue = "<leader>cC",
+              --   verbose = "<leader>cV",
+              -- },
+            },
+          },
+        })
+      end,
+    },
+
     {
       "williamboman/mason-lspconfig.nvim",
       dependencies = {
@@ -337,6 +378,37 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
 -- Center cursor after search navigation
 vim.keymap.set("n", "n", "nzz", { desc = "Next search result and center" })
 vim.keymap.set("n", "N", "Nzz", { desc = "Previous search result and center" })
+
+-- Exit terminal mode with double Esc
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- Open terminal in horizontal split
+vim.keymap.set("n", "<leader>t", "<cmd>split | terminal<cr>", { desc = "Open terminal" })
+
+-- Yank file path to clipboard
+vim.keymap.set("n", "<leader>yp", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  vim.notify("Yanked: " .. path)
+end, { desc = "Yank full file path" })
+
+vim.keymap.set("n", "<leader>yf", function()
+  local filename = vim.fn.expand("%:t")
+  vim.fn.setreg("+", filename)
+  vim.notify("Yanked: " .. filename)
+end, { desc = "Yank file name only" })
+
+vim.keymap.set("n", "<leader>yr", function()
+  local relpath = vim.fn.expand("%")
+  vim.fn.setreg("+", relpath)
+  vim.notify("Yanked: " .. relpath)
+end, { desc = "Yank relative file path" })
+
+vim.keymap.set("n", "<leader>yd", function()
+  local dir = vim.fn.expand("%:p:h")
+  vim.fn.setreg("+", dir)
+  vim.notify("Yanked: " .. dir)
+end, { desc = "Yank directory path" })
 
 -- Smart file runner
 vim.keymap.set("n", "<leader>r", function()

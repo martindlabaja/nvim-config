@@ -20,7 +20,24 @@ Leader key: `<Space>`
 ### File Explorer (Neo-tree)
 - `<Space>e` - Toggle Neo-tree
 - `<Space>o` - Focus Neo-tree
-- `?` - Help (when in Neo-tree)
+
+**Inside Neo-tree:**
+- `P` - Preview file (without leaving Neo-tree)
+- `l` or `Enter` - Open file
+- `S` - Open in horizontal split
+- `s` - Open in vertical split
+- `t` - Open in new tab
+- `w` - Open with window picker
+- `a` - Add file/folder (end with `/` for folder)
+- `d` - Delete file/folder
+- `r` - Rename
+- `c` - Copy
+- `m` - Move
+- `H` - Toggle hidden files
+- `I` - Toggle git ignored files
+- `R` - Refresh
+- `/` - Filter/search
+- `?` - Show all keybindings
 
 ### Fuzzy Finder (Telescope)
 - `<Space>ff` - Find files
@@ -54,12 +71,22 @@ Leader key: `<Space>`
 ### Code Execution
 - `<Space>r` - Run current file (smart runner for Python, JS, Lua, Bash, etc.)
 
+### Terminal
+- `<Space>t` - Open terminal in horizontal split
+- `Esc Esc` - Exit terminal mode (double-tap Escape)
+
 ### Navigation & Editing
 - `Ctrl+d` - Scroll down half page and center cursor
 - `Ctrl+u` - Scroll up half page and center cursor
 - `n` - Next search result and center cursor
 - `N` - Previous search result and center cursor
 - `Ctrl+w w` - Switch between splits/windows
+
+### Yank File Path
+- `<Space>yp` - Yank full absolute path
+- `<Space>yf` - Yank file name only
+- `<Space>yr` - Yank relative path
+- `<Space>yd` - Yank directory path
 
 ### Folding (Treesitter)
 - `za` - Toggle fold under cursor
@@ -73,5 +100,6 @@ Leader key: `<Space>`
 ## Setup
 
 Run `:Lazy sync` to install/update plugins
+Run `:Lazy update` to update plugins only
 Run `:Mason` to manage language servers
 Run `:checkhealth` to verify setup
