@@ -111,11 +111,27 @@ require("lazy").setup({
       config = function()
         require("telescope").setup({
           defaults = {
+            hidden = true,
+            vimgrep_arguments = {
+              "rg",
+              "--color=never",
+              "--no-heading",
+              "--with-filename",
+              "--line-number",
+              "--column",
+              "--smart-case",
+              "--hidden",
+            },
             mappings = {
               i = {
                 ["<C-j>"] = "move_selection_next",
                 ["<C-k>"] = "move_selection_previous",
               },
+            },
+          },
+          pickers = {
+            find_files = {
+              hidden = true,
             },
           },
         })
@@ -204,6 +220,18 @@ require("lazy").setup({
       end,
     },
 
+    -- Auto-session for saving/restoring sessions per folder
+    {
+      "rmagatti/auto-session",
+      config = function()
+        require("auto-session").setup({
+          auto_restore_enabled = true,
+          auto_save_enabled = true,
+          auto_session_suppress_dirs = { "~/", "/", "~/Downloads" },
+        })
+      end,
+    },
+
     -- Gitsigns for git integration
     {
       "lewis6991/gitsigns.nvim",
@@ -242,46 +270,6 @@ require("lazy").setup({
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
       },
-    },
-
-    -- Claude Code integration
-    {
-      "greggh/claude-code.nvim",
-      dependencies = { "nvim-lua/plenary.nvim" },
-      config = function()
-        require("claude-code").setup({
-          command = "claude --resume",
-          -- window = {
-          --   position = "botright",
-          --   split_ratio = 0.3,
-          --   enter_insert = true,
-          --   float = {
-          --     width = "80%",
-          --     height = "80%",
-          --     border = "rounded",
-          --   },
-          -- },
-          -- refresh = {
-          --   enable = true,
-          --   updatetime = 100,
-          --   timer_interval = 1000,
-          --   show_notifications = true,
-          -- },
-          -- git = {
-          --   use_git_root = true,
-          -- },
-          keymaps = {
-            toggle = {
-              normal = "<leader>cc",
-              terminal = "<leader>cc",
-              -- variants = {
-              --   continue = "<leader>cC",
-              --   verbose = "<leader>cV",
-              -- },
-            },
-          },
-        })
-      end,
     },
 
     {
@@ -409,6 +397,18 @@ vim.keymap.set("n", "<leader>yd", function()
   vim.fn.setreg("+", dir)
   vim.notify("Yanked: " .. dir)
 end, { desc = "Yank directory path" })
+
+-- Window navigation with Ctrl+hjkl
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left pane" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to pane below" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to pane above" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right pane" })
+
+-- Window resize (10 steps instead of 1)
+vim.keymap.set("n", "<C-w>+", ":resize +17<CR>", { silent = true, desc = "Increase height" })
+vim.keymap.set("n", "<C-w>-", ":resize -17<CR>", { silent = true, desc = "Decrease height" })
+vim.keymap.set("n", "<C-w>>", ":vertical resize +17<CR>", { silent = true, desc = "Increase width" })
+vim.keymap.set("n", "<C-w><", ":vertical resize -17<CR>", { silent = true, desc = "Decrease width" })
 
 -- Smart file runner
 vim.keymap.set("n", "<leader>r", function()
