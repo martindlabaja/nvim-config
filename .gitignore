@@ -11,3 +11,6 @@
 # OS files
 .DS_Store
 Thumbs.db
+
+# Lazy.nvim lock file
+lazy-lock.json

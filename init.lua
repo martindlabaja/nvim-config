@@ -14,6 +14,24 @@ vim.opt.shiftwidth = 4
 
 vim.opt.clipboard = "unnamedplus"
 
+-- OSC52 clipboard for SSH (works without X11)
+if os.getenv("SSH_CONNECTION") then
+  local function paste()
+    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
+  end
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = paste,
+      ["*"] = paste,
+    },
+  }
+end
+
 vim.opt.inccommand = "split"
 
 vim.opt.ignorecase = true

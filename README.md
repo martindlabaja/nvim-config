@@ -87,6 +87,7 @@ Leader key: `<Space>`
 ### Terminal
 - `<Space>t` - Open terminal in horizontal split
 - `Esc Esc` - Exit terminal mode (double-tap Escape)
+- `Ctrl+d` - Close terminal
 
 ### Navigation & Editing
 - `Ctrl+d` - Scroll down half page and center cursor
@@ -138,6 +139,11 @@ Leader key: `<Space>`
 **Close:**
 - `Ctrl+w q` - Close current pane
 - `Ctrl+w o` - Close all other panes (only)
+
+## Clipboard
+
+Clipboard works automatically over SSH using OSC52 (requires a modern terminal).
+For local sessions, install: `sudo apt install xclip`
 
 ## Setup
 
