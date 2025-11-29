@@ -385,8 +385,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
 vim.keymap.set("n", "n", "nzz", { desc = "Next search result and center" })
 vim.keymap.set("n", "N", "Nzz", { desc = "Previous search result and center" })
 
--- Exit terminal mode with double Esc
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+-- Exit terminal mode with Esc
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Open terminal in horizontal split
 vim.keymap.set("n", "<leader>t", "<cmd>split | terminal<cr>", { desc = "Open terminal" })
@@ -415,6 +415,10 @@ vim.keymap.set("n", "<leader>yd", function()
   vim.fn.setreg("+", dir)
   vim.notify("Yanked: " .. dir)
 end, { desc = "Yank directory path" })
+
+-- Window splits (empty buffer instead of duplicate)
+vim.keymap.set("n", "<C-w>s", "<cmd>new<cr>", { desc = "Split horizontal (empty)" })
+vim.keymap.set("n", "<C-w>v", "<cmd>vnew<cr>", { desc = "Split vertical (empty)" })
 
 -- Window navigation with Ctrl+hjkl
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left pane" })
