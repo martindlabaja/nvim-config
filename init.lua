@@ -246,9 +246,14 @@ require("lazy").setup({
           auto_restore_enabled = true,
           auto_save_enabled = true,
           auto_session_suppress_dirs = { "~/", "/", "~/Downloads" },
+          -- Close Neo-tree before saving session to prevent buffer conflicts
+          pre_save_cmds = { "Neotree close" },
         })
       end,
     },
+
+    -- CSV file handling with ASCII table display
+    { "chrisbra/csv.vim" },
 
     -- Gitsigns for git integration
     {
