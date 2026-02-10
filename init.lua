@@ -161,30 +161,18 @@ require("lazy").setup({
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
       config = function()
-        require("nvim-treesitter.configs").setup({
-          ensure_installed = {
-            "lua",
-            "vim",
-            "vimdoc",
-            "python",
-            "javascript",
-            "typescript",
-            "html",
-            "css",
-            "json",
-            "markdown",
-            "bash",
-          },
-          auto_install = true,
-          highlight = {
-            enable = true,
-          },
-          indent = {
-            enable = true,
-          },
-        })
+        local parsers = {
+          "lua", "vim", "vimdoc", "python", "javascript",
+          "typescript", "html", "css", "json", "markdown", "bash",
+          "cpp", "c",
+        }
+        -- Install parsers on startup (async, won't block)
+        require("nvim-treesitter").install(parsers)
       end,
     },
+
+    -- Unreal Engine C++ syntax highlighting (UCLASS, UPROPERTY, etc.)
+    { "taku25/USX.nvim", opts = {} },
 
     -- Lualine statusline
     {
