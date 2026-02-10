@@ -156,22 +156,37 @@ require("lazy").setup({
       end,
     },
 
+    -- Unreal Engine C++ tree-sitter parser (UCLASS, UPROPERTY, etc.)
+    { "taku25/tree-sitter-unreal-cpp" },
+
     -- Treesitter for syntax highlighting
     {
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
+      dependencies = { "taku25/tree-sitter-unreal-cpp" },
       config = function()
+        -- Register UE C++ parser to replace the standard cpp parser
+        require("nvim-treesitter.parsers").cpp = {
+          install_info = {
+            url = "https://github.com/taku25/tree-sitter-unreal-cpp",
+          },
+        }
         local parsers = {
           "lua", "vim", "vimdoc", "python", "javascript",
           "typescript", "html", "css", "json", "markdown", "bash",
           "cpp", "c",
         }
-        -- Install parsers on startup (async, won't block)
         require("nvim-treesitter").install(parsers)
+        -- Enable treesitter highlighting for all supported filetypes
+        vim.api.nvim_create_autocmd("FileType", {
+          callback = function()
+            if pcall(vim.treesitter.start) then end
+          end,
+        })
       end,
     },
 
-    -- Unreal Engine C++ syntax highlighting (UCLASS, UPROPERTY, etc.)
+    -- Unreal Engine C++ syntax highlighting queries
     { "taku25/USX.nvim", opts = {} },
 
     -- Lualine statusline
