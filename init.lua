@@ -165,6 +165,13 @@ require("lazy").setup({
       build = ":TSUpdate",
       dependencies = { "taku25/tree-sitter-unreal-cpp" },
       config = function()
+        -- Ensure nvim-treesitter runtime/queries are discoverable
+        local ts_path = vim.fn.stdpath("data") .. "/lazy/nvim-treesitter"
+        local queries_link = ts_path .. "/queries"
+        local queries_target = ts_path .. "/runtime/queries"
+        if vim.fn.isdirectory(queries_target) == 1 and vim.fn.filereadable(queries_link) == 0 and vim.fn.isdirectory(queries_link) == 0 then
+          vim.uv.fs_symlink(queries_target, queries_link)
+        end
         -- Register UE C++ parser to replace the standard cpp parser
         require("nvim-treesitter.parsers").cpp = {
           install_info = {
