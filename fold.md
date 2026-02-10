@@ -1,0 +1,5 @@
+  - zc — close/collapse fold under cursor
+  - zo — open fold under cursor
+  - za — toggle fold
+  - zM — close all folds
+  - zR — open all folds
