@@ -24,6 +24,8 @@ Leader key: `<Space>`
 
 **Inside Neo-tree:**
 - `P` - Preview file (without leaving Neo-tree)
+- `Ctrl+f` - Scroll preview down
+- `Ctrl+b` - Scroll preview up
 - `l` or `Enter` - Open file
 - `S` - Open in horizontal split
 - `s` - Open in vertical split
